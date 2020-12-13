@@ -87,3 +87,21 @@ async function run(): Promise<void> {
     console.log(`TODO: Create Flareact app called ${projectName}...`);
   }
 }
+
+run()
+  .then(() => {
+    console.log("done");
+  })
+  .catch(async (reason) => {
+    console.log();
+    console.log("Aborting installation.");
+    if (reason.command) {
+      console.log(`  ${chalk.cyan(reason.command)} has failed.`);
+    } else {
+      console.log(chalk.red("Unexpected error. Please report it as a bug:"));
+      console.log(reason);
+    }
+    console.log();
+
+    process.exit(1);
+  });
