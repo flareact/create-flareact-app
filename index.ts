@@ -50,42 +50,42 @@ async function run(): Promise<void> {
     if (typeof res.path === "string") {
       projectPath = res.path.trim();
     }
-
-    if (!projectPath) {
-      console.log();
-      console.log("Please specify the project directory:");
-      console.log(`  ${chalk.cyan(program.name())} ${chalk.green("<project-directory>")}`);
-      console.log();
-      console.log("For example:");
-      console.log(`  ${chalk.cyan(program.name())} ${chalk.green("my-flareact-app")}`);
-      console.log();
-      console.log(`Run ${chalk.cyan(`${program.name()} --help`)} to see all options.`);
-      process.exit(1);
-    }
-
-    const resolvedProjectPath = path.resolve(projectPath);
-    const projectName = path.basename(resolvedProjectPath);
-
-    const { valid, problems } = validateNpmName(projectName);
-    if (!valid) {
-      console.error(
-        `Could not create a project called ${chalk.red(`"${projectName}"`)} because of npm naming restrictions:`
-      );
-
-      problems!.forEach((p) => console.error(`    ${chalk.red.bold("*")} ${p}`));
-      process.exit(1);
-    }
-
-    if (program.example === true) {
-      console.error("Please provide an example name or url, otherwise remove the example option.");
-      process.exit(1);
-      return;
-    }
-
-    const example = typeof program.example === "string" && program.example.trim();
-
-    console.log(`TODO: Create Flareact app called ${projectName}...`);
   }
+
+  if (!projectPath) {
+    console.log();
+    console.log("Please specify the project directory:");
+    console.log(`  ${chalk.cyan(program.name())} ${chalk.green("<project-directory>")}`);
+    console.log();
+    console.log("For example:");
+    console.log(`  ${chalk.cyan(program.name())} ${chalk.green("my-flareact-app")}`);
+    console.log();
+    console.log(`Run ${chalk.cyan(`${program.name()} --help`)} to see all options.`);
+    process.exit(1);
+  }
+
+  const resolvedProjectPath = path.resolve(projectPath);
+  const projectName = path.basename(resolvedProjectPath);
+
+  const { valid, problems } = validateNpmName(projectName);
+  if (!valid) {
+    console.error(
+      `Could not create a project called ${chalk.red(`"${projectName}"`)} because of npm naming restrictions:`
+    );
+
+    problems!.forEach((p) => console.error(`    ${chalk.red.bold("*")} ${p}`));
+    process.exit(1);
+  }
+
+  if (program.example === true) {
+    console.error("Please provide an example name or url, otherwise remove the example option.");
+    process.exit(1);
+    return;
+  }
+
+  const example = typeof program.example === "string" && program.example.trim();
+
+  console.log(`TODO: Create Flareact app called ${projectName}...`);
 }
 
 run()
